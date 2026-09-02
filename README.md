@@ -1,5 +1,9 @@
 # Sentinel
 
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Claude Skill](https://img.shields.io/badge/Claude-Skill-blueviolet)
+![MCP](https://img.shields.io/badge/MCP-Binance%20Agent%20OS-F0B90B)
+
 A Claude skill that turns Claude into a full trading copilot for [Binance Agent OS](https://binance.com/agent-os) (Binance's MCP server for AI applications) — not just an order executor, but a system that watches your portfolio, challenges risky trades, reads market conditions, remembers every trade, and learns from your track record over time.
 
 Built for Binance's Agent OS Mini Hackathon (Track A).
