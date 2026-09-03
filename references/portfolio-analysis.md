@@ -22,12 +22,13 @@ For each asset/position, compute:
 Aggregate:
 - **Total unrealized P&L** across all open positions
 - **Total leverage exposure**: sum of notional value of leveraged positions ÷ equity (gives a sense of overall portfolio leverage, not just per-position)
+- **Combined per-asset exposure**: if the same underlying asset appears in more than one place — e.g. a spot BTC balance *and* a BTC-USDT futures position — sum their value/notional together into one combined exposure figure for that asset. List them as separate line items in the breakdown (so the user can see the spot holding and the futures position distinctly), but the combined figure is what feeds the concentration check in Step 3, not either piece alone.
 
 ## Step 3 — Run risk flags
 
 Reuse the funding-rate and concentration definitions already established in `references/trade-guardian-thresholds.md` sections 3 and 5 respectively — don't redefine separate numbers here, so a single "40% concentration" definition stays consistent across the whole skill.
 
-- **Concentration**: single asset > 40% of equity, or correlated group (BTC/ETH/SOL-style "crypto beta") > 60% of equity
+- **Concentration**: single asset's *combined* exposure (spot + margin + futures notional for that underlying, per Step 2) > 40% of equity, or correlated group (BTC/ETH/SOL-style "crypto beta") > 60% of equity. Computing this from spot holdings alone would understate concentration for anyone running both a spot position and a futures position on the same asset.
 - **Funding rate exposure**: for any open futures position, note if its funding rate is in "elevated" or "extreme" territory (same bands as Trade Guardian) — this is a cost that's actively accruing, not just a one-time entry consideration
 - **Leverage concentration**: if most of the portfolio's total leverage sits in one or two positions rather than spread out, flag it — one blown position doing outsized damage is a different risk shape than several smaller leveraged bets
 
