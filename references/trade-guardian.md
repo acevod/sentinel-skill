@@ -30,7 +30,7 @@ Pull what's relevant to the trade: current price, 24h % change, 24h volume, and 
 
 ## Step 4 — Check portfolio/exposure
 
-Pull current account/position info via the connected MCP: existing exposure to this asset, exposure to correlated assets (e.g. BTC/ETH/SOL treated as one "crypto beta" group), current leverage on the symbol, and any open orders on it. Compute what the allocation would look like *after* the trade. If Portfolio Analysis already pulled this in the same turn, reuse it.
+Pull current account/position info via the connected MCP: existing exposure to this asset — combined across spot, margin, and futures if the user holds it in more than one place (see `references/portfolio-analysis.md` Step 2 for how combined exposure is computed; don't undercount by checking only the account type of the trade being made) — exposure to correlated assets (e.g. BTC/ETH/SOL treated as one "crypto beta" group), current leverage on the symbol, and any open orders on it. Compute what the allocation would look like *after* the trade. If Portfolio Analysis already pulled this in the same turn, reuse it.
 
 ## Step 5 — Devil's Advocate + Bull Case
 
