@@ -4,8 +4,15 @@ This module runs when the user asks about their trading results or patterns *ove
 
 ## Data sources — read in this order
 
-1. **Primary — exchange trade/order history via MCP** (trade list, order history, income/realized-P&L history). This is the authoritative record of what actually happened, and it's complete regardless of whether every trade went through Sentinel. All hard numbers below are computed from this source.
+1. **Primary — exchange trade/order history via MCP, across every account type the user actually trades**, not spot alone:
+   - Spot trade history
+   - Margin trade history (if the user has margin activity)
+   - Futures trade/order and income (realized P&L) history — futures P&L in particular isn't always derivable from the trade list alone, since funding payments and mark-price settlement affect realized P&L; pull income history specifically for this when available.
+   
+   Don't assume the account only trades spot — Trade Guardian itself handles spot, margin, and futures, so a user's history can span all three. Pulling spot data only and presenting it as "your performance" would silently misrepresent anyone with futures or margin activity. This is the authoritative record of what actually happened, and it's complete regardless of whether every trade went through Sentinel — all hard numbers below are computed from this source.
 2. **Secondary — the journal** (`/areas/trading-journal.md`, written by `references/trading-journal.md`). Read-only here — this module never writes to it. Used to explain *why* a pattern exists, not to compute the pattern itself.
+
+If a symbol/account type comes back empty (e.g. the user has never traded futures), that's fine — just don't report on results you didn't actually check as if their absence means zero activity there.
 
 If a trade appears in exchange history but has no matching journal entry (executed outside Sentinel, or before the user started using it), still include it in the hard numbers — just without the reasoning enrichment for that specific trade.
 
