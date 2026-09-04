@@ -8,6 +8,7 @@ TRADE GUARDIAN
 Requested: [action, e.g. "Buy $500 BTC" / "Open 20x ETH long"]
 
 MARKET CHECK:
+- Current price: $[price]
 - [Symbol] momentum: [24h % move, direction]
 - Funding: [normal/elevated/extreme, with number if elevated+]
 - Volume: [normal/elevated, brief note]
@@ -33,10 +34,10 @@ Do you still want me to execute [the trade]?
 
 ## Light Guardian (one threshold crossed into "light" tier only)
 
-Condensed version — skip full Devil's Advocate/Bull Case lists, just state the one or two factors that triggered escalation and ask for confirmation:
+Condensed version — skip full Devil's Advocate/Bull Case lists, just state the one or two factors that triggered escalation and ask for confirmation. Still state the current price somewhere in the confirmation line, even condensed — the user is confirming a purchase and shouldn't have to ask what price they're buying at:
 
 ```
-Quick check before I execute [action]:
+Quick check before I execute [action] at ~$[price]:
 - [The one or two factors that triggered Light tier, e.g. "this would put BTC at ~12% of equity"]
 
 Verdict: [short risk note]. Go ahead?
