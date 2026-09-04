@@ -13,14 +13,25 @@ Use Claude's memory tools (`memory_read`, `memory_write`, `memory_append`, `memo
 
 ## Entry format
 
-Each entry is numbered sequentially, zero-padded to 3 digits, and never reused even if a trade is later corrected — corrections get a note, not a renumber.
+Each entry is numbered sequentially, zero-padded to 3 digits, and never reused even if a trade is later corrected — corrections get a note, not a renumber. Fields adapt to the trade type — a spot trade has no leverage or margin type, so those lines are simply omitted rather than shown as N/A.
 
+Futures example:
 ```
 ### #001 — 2026-09-02 14:32 UTC — BUY BTC/USDT (Full Guardian)
 - Action: Open long, 5x leverage, $800 (≈8.2% of equity at the time)
 - Fill: 0.0091 BTC @ $87,420
 - Guardian verdict at execution: "Moderate risk — elevated funding (0.06%)"
 - Warnings raised: elevated funding rate flagged; user confirmed anyway
+- Status: OPEN
+```
+
+Spot example (no leverage/margin fields):
+```
+### #002 — 2026-09-04 10:15 UTC — BUY BNB/USDT (Full Guardian)
+- Action: Spot buy, $5 requested (≈62% of equity at the time)
+- Fill: 0.006 BNB @ $719.99 (filled to nearest lot size, slightly under request)
+- Guardian verdict at execution: "High-risk entry — concentrates ~74% of a small account into one asset"
+- Warnings raised: concentration, no diversification left; user confirmed anyway
 - Status: OPEN
 ```
 
