@@ -29,11 +29,12 @@ Raw data dumped as a list isn't intelligence — the value of this module is tur
 ```
 MARKET SNAPSHOT — [date/time]
 
-Mood: [Risk-on / Risk-off / Mixed / Choppy — one line with the reasoning, not just the label]
+Mood: [Risk-on / Risk-off / Mixed / Choppy — one line with the reasoning, not just the label. Scope this to what was actually sampled — "broad strength across the pairs checked" or "every major pair I checked is green," not "the whole board" or "the entire market." Only the pairs actually pulled in Step 2 were checked, which is a sample of major pairs, not the full market — the wording should reflect that every time, not just in the Movers section.]
 
 MOVERS:
-- [Top gainer]: [+X% 24h]
-- [Top loser]: [-Y% 24h]
+- [List the top 2–4 movers on whichever side(s) actually exist among the pairs sampled, e.g. "XRP: +3.7%", "SOL: +3.0%", "DOGE: +2.6%"]
+- [If there are decliners too, list the top 2–4 of those the same way]
+- [If one side is empty — e.g. every sampled pair is green — say so explicitly: "No decliners among the pairs sampled" — don't just omit the line, since silence there is ambiguous between "none exist" and "wasn't checked"]
 
 FUNDING LANDSCAPE:
 - [Broadly normal / broadly elevated long-side / broadly elevated short-side], [note any pair at an extreme band]
