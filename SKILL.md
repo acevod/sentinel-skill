@@ -60,10 +60,7 @@ Trade Guardian's own workflow (`references/trade-guardian.md`, Step 10) already 
 ## Cross-module data sharing
 
 - Portfolio Analysis and Trade Guardian both need current position/exposure data — if a request routes through both (e.g. "buy more ETH" after reviewing exposure), don't re-pull the same MCP data twice in one turn if it's already been fetched.
-- **Performance Analytics uses two sources, not one:**
-  - **Primary source — exchange trade/order history via MCP** (order history, trade list, income history). This is the authoritative, complete record of what actually happened, independent of whether every trade went through Sentinel. All hard numbers (win rate, realized P&L, R:R ratio) are computed from this, never from the journal alone — the journal only covers trades executed through Trade Guardian, so using it as the sole source would silently exclude any trade made outside Sentinel (e.g. directly on the exchange) or before the user started using it.
-  - **Secondary source — the journal** (see `references/trading-journal.md`). Adds the reasoning/context exchange data can't provide: what Guardian warned about, what the user was told before confirming, user's own notes. Performance Analytics is read-only against the journal — it never writes to it.
-  - The strongest pattern-detection output combines both: exchange data identifies *what* happened (e.g. "7 of 10 losses were on trades with leverage above 10x"), the journal explains *why* it's meaningful (e.g. "6 of those 7 were trades where Guardian flagged the leverage but the user confirmed anyway").
+- **Performance Analytics data sourcing** is fully specified in `references/performance-analytics.md` — this router doesn't duplicate that detail (a prior version did, and drifted out of sync with it after an update). The short version: exchange history across all account types is primary, the journal is secondary context only — see that file for the full rule, including why account types can't be pre-filtered by assumption.
 - Market Intelligence data (funding rate landscape, broad volatility) can inform Trade Guardian's Devil's Advocate step if both are relevant in the same conversation — but Trade Guardian's own reference file has the authoritative per-trade thresholds; Market Intelligence is context, not an override.
 
 ## Design principles
