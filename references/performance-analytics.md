@@ -4,12 +4,12 @@ This module runs when the user asks about their trading results or patterns *ove
 
 ## Data sources — read in this order
 
-1. **Primary — exchange trade/order history via MCP, across every account type the user actually trades**, not spot alone:
+1. **Primary — exchange trade/order history via MCP.** Query **all three** account types every time this module runs — spot, margin, and futures — regardless of what you assume the user trades. Don't decide in advance which account types to check based on what Trade Guardian has executed so far in this conversation, or based on any other assumption about the user's habits — that's circular: the only way to know whether the user has futures or margin activity is to actually query those endpoints, not to infer it and skip the query. An empty result from a given account type just means no activity there; it's a valid outcome of checking, not a reason to have skipped checking.
    - Spot trade history
-   - Margin trade history (if the user has margin activity)
+   - Margin trade history
    - Futures trade/order and income (realized P&L) history — futures P&L in particular isn't always derivable from the trade list alone, since funding payments and mark-price settlement affect realized P&L; pull income history specifically for this when available.
    
-   Don't assume the account only trades spot — Trade Guardian itself handles spot, margin, and futures, so a user's history can span all three. Pulling spot data only and presenting it as "your performance" would silently misrepresent anyone with futures or margin activity. This is the authoritative record of what actually happened, and it's complete regardless of whether every trade went through Sentinel — all hard numbers below are computed from this source.
+   Trade Guardian itself handles spot, margin, and futures, so a user's history can span all three even if only one type has shown up in this conversation so far. Pulling spot data only and presenting it as "your performance" would silently misrepresent anyone with futures or margin activity. This is the authoritative record of what actually happened, and it's complete regardless of whether every trade went through Sentinel — all hard numbers below are computed from this source.
 2. **Secondary — the journal** (`/areas/trading-journal.md`, written by `references/trading-journal.md`). Read-only here — this module never writes to it. Used to explain *why* a pattern exists, not to compute the pattern itself.
 
 If a symbol/account type comes back empty (e.g. the user has never traded futures), that's fine — just don't report on results you didn't actually check as if their absence means zero activity there.
