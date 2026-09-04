@@ -28,7 +28,7 @@ Aggregate:
 
 Reuse the funding-rate and concentration definitions already established in `references/trade-guardian-thresholds.md` sections 3 and 5 respectively — don't redefine separate numbers here, so a single "40% concentration" definition stays consistent across the whole skill.
 
-- **Concentration**: single asset's *combined* exposure (spot + margin + futures notional for that underlying, per Step 2) > 40% of equity, or correlated group (BTC/ETH/SOL-style "crypto beta") > 60% of equity. Computing this from spot holdings alone would understate concentration for anyone running both a spot position and a futures position on the same asset.
+- **Concentration**: single asset's *combined* exposure (spot + margin + futures notional for that underlying, per Step 2) > 40% of equity, or correlated group (BTC/ETH/SOL-style "crypto beta") > 60% of equity. Computing this from spot holdings alone would understate concentration for anyone running both a spot position and a futures position on the same asset. Per `references/trade-guardian-thresholds.md` section 5, idle stablecoin balance (USDT, USDC, etc. held as base/quote currency) is excluded from this check — a large stablecoin balance is uninvested, not concentrated risk.
 - **Funding rate exposure**: for any open futures position, note if its funding rate is in "elevated" or "extreme" territory (same bands as Trade Guardian) — this is a cost that's actively accruing, not just a one-time entry consideration
 - **Leverage concentration**: if most of the portfolio's total leverage sits in one or two positions rather than spread out, flag it — one blown position doing outsized damage is a different risk shape than several smaller leveraged bets
 
