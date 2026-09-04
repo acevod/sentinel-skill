@@ -33,8 +33,9 @@ If any one threshold below crosses into "light" or "full," the whole trade escal
 | > 70% (or closing to zero) | Full Guardian |
 
 ## 5. Concentration
-- Single asset > 40% of total equity → flag concentration risk
+- Single **risk asset** > 40% of total equity → flag concentration risk
 - Correlated group (e.g. BTC + ETH + SOL as "crypto beta") > 60% of total equity → flag even if no single asset is individually over 40%
+- **Stablecoins held as the account's base/quote currency (e.g. USDT, USDC, BUSD) are excluded from this check.** A large USDT balance is an un-deployed, low-risk position — the opposite of a concentrated bet — not something to flag as concentration risk. If a stablecoin is being actively traded as a volatility play against another stablecoin or asset (rare, but possible), that specific position isn't "base currency" and should be evaluated normally — the exclusion is for idle stablecoin balance, not stablecoin trades.
 
 ## 6. Momentum (Devil's Advocate input)
 - 24h price move > ±7% in the *same direction* as the requested trade → flag as "chasing momentum"
